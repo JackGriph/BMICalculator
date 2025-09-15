@@ -58,7 +58,7 @@ namespace BMICalculator
             Console.WriteLine($"Ditt BMI: {userBmi:F2}");
 
             double userBmi2 = CalculateBMI(userHeight, userWeight);
-            Console.WriteLine($"Ditt BMI (omvänd ordning): {userBmi2:F2}");
+            Console.WriteLine($"Ditt BMI (omvänd ordning): {userBmi2:F2}"); 
 
         }
     }
