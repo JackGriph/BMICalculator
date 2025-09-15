@@ -6,11 +6,18 @@ namespace BMICalculator
     {
         static double CalculateBMI(double weight, double height, string unit = "metric")
         {
-            if ( unit == "metric"  )
+
+            if (height <= 0)
+            {
+                Console.WriteLine("Höjden måste vara större än 0");
+                return 0;
+            }
+
+            if (unit == "metric")
             {
                 return weight / (height * height);
             }
-            else if ( unit == "imperial" )
+            else if (unit == "imperial")
             {
                 return (weight / (height * height)) * 703;
             }
@@ -23,13 +30,37 @@ namespace BMICalculator
         }
         static void Main(string[] args)
         {
-            // Vanligt anrop (metric, default)
-            double bmi1 = CalculateBMI(70, 1.78);
-            Console.WriteLine($"BMI (metric, default): {bmi1:F2}");
 
-            // Namngivna i ordning
-            double bmi2 = CalculateBMI(height: 1.78, weight: 70);
+            // Egna inmatningar
+
+            Console.Write("Ange vikt: ");
+            if (!double.TryParse(Console.ReadLine(), out double userWeight))
+            {
+                Console.WriteLine("Felaktig vikt.");
+                return;
+            }
+
+            Console.Write("Ange längd: ");
+            if (!double.TryParse(Console.ReadLine(), out double userHeight))
+            {
+                Console.WriteLine("Felaktig längd.");
+                return;
+            }
+
+            Console.Write("Ange enhet (metric/imperial): ");
+            string userUnit = Console.ReadLine()?.Trim().ToLower();
+            if (string.IsNullOrEmpty(userUnit))
+            {
+                userUnit = "metric";
+            }
+
+            double userBmi = CalculateBMI(userWeight, userHeight, userUnit);
+            Console.WriteLine($"Ditt BMI: {userBmi:F2}");
+
+            double userBmi2 = CalculateBMI(userHeight, userWeight);
+            Console.WriteLine($"Ditt BMI (omvänd ordning): {userBmi2:F2}");
 
         }
     }
-}
+    }
+
